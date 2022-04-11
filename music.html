@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudeepa's Favourites</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+    <div class="main_div">
+        <div class ="music_container">
+            <h2 id="title"> Deathbed </h2>
+            <h3 id="artist">powfu</h3>
+            <div class="img_container">
+                 <img src = "images/powfu.jpeg" alt="powfu">
+
+            </div>
+            <audio src="music/powfu.mp3" ></audio>
+
+            <div class="music-controls">
+                <i class="fas fa-backward" id="prev" title="Previous"></i>
+                <i class="fas fa-play main-button" id="play" title="Play"></i>
+                <i class="fas fa-forward" id="next" title="Next"></i>
+            </div>
+        </div>
+        
+    </div>
+    <script>
+        const music = document.querySelector("audio");
+        const img = document.querySelector("img");
+        const play = document.getElementById("play");
+        const artist = document.getElementById("artist");
+        const title = document.getElementById("title");
+        const prev = document.getElementById("prev");
+        const next = document.getElementById("next");
+
+        const songs = [
+        
+            
+        {
+            name:"powfu",
+            title:"Deathbed",
+            artist:"powfu", 
+        },
+        {
+            name:"Pera_nai_chill",
+            title:"Pera nai Chill",
+            artist:"Shiekh Sadi,Purnoy Roy", 
+        },
+        {
+            name:"lovenwatii",
+            title: "lovenwatii",
+            artist: "Ckay"
+        },
+        {
+            name: "Olir",
+            title:"Olir",
+            artist: "Hemanta Mukherjee"
+
+        },
+        {
+            name:"ratan",
+            title: "Raataan Lambiyaa",
+            artist: "Jubin Nautiyal"
+        },
+        {
+            name:"attention",
+            title: "Attention",
+            artist: "Charlie Puth"
+        },
+        {
+            name:"stay",
+            title: "Stay",
+            artist: "Kid laroi feat. Justin Bieber"
+        },
+        {
+            name:"Monta",
+            title: "Monta Re",
+            artist: "Swanand Kirkire, Amitabh B"
+        },
+
+        {
+            name:"badguy",
+            title: "Bad Guy",
+            artist: "Billie Eilish"
+        },
+        {
+            name:"Levitating",
+            title: "Levitating",
+            artist: "Dua Lipa"
+        },
+        {
+            name:"Jawl",
+            title: "Jawl Phoring 2.0",
+            artist: "Anupam Roy"
+        },
+        {
+            name:"Lovely",
+            title: "Lovely",
+            artist: "Billie Eilish"
+        },
+        {
+            name:"Amake",
+            title: "Amake",
+            artist: "Anupam Roy"
+        },
+        
+        
+        
+        
+
+            
+        ]
+        
+        let  isPlaying = false;
+
+        
+//for play function 
+         const playMusic = () => {
+             isPlaying = true;
+             music.play();
+             play.classList.replace("fa-play", "fa-pause");
+             img.classList.add("anime");
+         }
+        
+///for pause function 
+        const pauseMusic = () => {
+            isPlaying = false;
+            music.pause();
+            play.classList.replace("fa-pause", "fa-play");
+            img.classList.remove("anime")
+        }
+
+
+        play.addEventListener("click", () => {
+            if(isPlaying){
+                pauseMusic();
+            }
+            else{
+                playMusic();
+            }
+        })
+
+        // changing  the music data
+       const  loadSong = (songs) => {
+           title.textContent = songs.title;
+           artist.textContent = songs.artist;
+           music.src = "music/" +songs.name+ ".mp3";
+         img.src = "images/" + songs.name+ ".jpeg"; 
+
+       }
+
+       songIndex = 0;
+
+
+        //loadSong(songs[3]);
+        const nextSong = () => {
+            songIndex = (songIndex +1) %songs.length;
+           loadSong(songs[songIndex]);
+           playMusic();
+        };
+        const prevSong = () => {
+            songIndex = (songIndex -1 + songs.length) % songs.length;
+           loadSong(songs[songIndex]);
+           playMusic();
+        }
+         
+
+
+        next.addEventListener("click",nextSong);
+        prev.addEventListener("click", prevSong);
+
+    </script>
+</body>
+</html>
